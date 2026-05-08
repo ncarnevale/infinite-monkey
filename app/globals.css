@@ -23,3 +23,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+.stage-dir {
+  margin-top: 0.875rem;
+  padding-top: 0.125rem;
+}
