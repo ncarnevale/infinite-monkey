@@ -14,6 +14,8 @@
   --color-foreground: var(--ink);
   --font-sans: var(--font-typewriter), "Courier Prime", "Courier New", ui-monospace, monospace;
   --font-mono: var(--font-typewriter), "Courier Prime", "Courier New", ui-monospace, monospace;
+  --text-base: 1.25rem;
+  --text-base--line-height: 1.5;
 }
 
 body {
