@@ -80,10 +80,10 @@ MASTER.
 
     expect(cleaned.length).toBeGreaterThan(0);
 
+    expect(cleaned.startsWith("ACT I")).toBe(true);
     const firstNonBlank = cleaned.split("\n").find((line) => line.trim()) ?? "";
-    expect(firstNonBlank).toBe("THE TEMPEST");
+    expect(firstNonBlank).toBe("ACT I");
 
-    expect(cleaned).toContain("ACT I");
     expect(cleaned).toContain("ACT V");
     expect(cleaned).toContain("EPILOGUE");
 
@@ -98,5 +98,15 @@ MASTER.
     expect(cleaned).not.toContain("[_Exit._]");
     expect(cleaned).not.toContain("*** START OF THE PROJECT GUTENBERG");
     expect(cleaned).not.toContain("*** END OF THE PROJECT GUTENBERG");
+  });
+
+  it("Tempest fixture: strips table of contents and dramatis personae", () => {
+    const cleaned = cleanGutenbergText(readFileSync(fixturePath, "utf8"));
+
+    expect(cleaned.startsWith("ACT I")).toBe(true);
+    expect(cleaned).not.toContain("Contents");
+    expect(cleaned).not.toContain("Dramatis Personæ");
+    expect(cleaned).not.toContain("PROSPERO, the right Duke of Milan");
+    expect(cleaned).not.toContain("SCENE: The sea, with a Ship");
   });
 });
