@@ -32,14 +32,34 @@ function sliceFromShakespeareOpeningIfPresent(body: string): string {
   return body;
 }
 
+/**
+ * PG often indents prose stage directions with a single leading space after a newline.
+ * Treat everything from after that space until the next blank line (`\n\n`) as one stage
+ * direction and wrap it in brackets. Skip blocks that are empty or already start with `[`
+ * after trimming (already marked as stage directions).
+ */
+function wrapIndentedStageDirections(body: string): string {
+  return body.replace(/\n ([\s\S]*?)(?=\n\n|$)/g, (full, chunk: string) => {
+    const t = chunk.trim();
+    if (t.length === 0 || t.startsWith("[")) return full;
+    return `\n[${t}]`;
+  });
+}
+
+/** PG indents bracketed directions with a single space; strip it so lines start with `[`. */
+function stripLeadingSpaceBeforeBracketStageDirections(body: string): string {
+  return body.replace(/(^|\n) (?=\[)/g, "$1");
+}
+
 function normalizeCleanedBody(body: string): string {
-  return body
+  let out = body
     .split("\n")
     .map((line) => line.replace(/\s+$/, ""))
     .join("\n")
-    .replace(/_([^_\n]+)_/g, "$1")
-    .replace(/\n{4,}/g, "\n\n\n")
-    .trim();
+    .replace(/_([^_\n]+)_/g, "$1");
+  out = wrapIndentedStageDirections(out);
+  out = stripLeadingSpaceBeforeBracketStageDirections(out);
+  return out.replace(/\n{4,}/g, "\n\n\n").trim();
 }
 
 export function cleanGutenbergText(raw: string, title: string): string {

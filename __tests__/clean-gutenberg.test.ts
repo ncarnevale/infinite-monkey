@@ -65,6 +65,51 @@ Updated editions will replace the previous one
     expect(out).not.toMatch(/Updated editions will replace the previous one/);
   });
 
+  it("wraps PG single-space indented stage directions in brackets until the blank line", () => {
+    const raw = `
+*** START OF THE PROJECT GUTENBERG EBOOK DEMO ***
+
+MASTER.
+Speak, spirit.
+
+ Enter Ariel softly.
+
+ What ho! more work yet?
+
+ARIEL.
+How now?
+
+*** END OF THE PROJECT GUTENBERG EBOOK DEMO ***
+`.trim();
+
+    const out = cleanGutenbergText(raw, "Demo Title");
+    expect(out).not.toContain("\n Enter ");
+    expect(out).toContain(`[Enter Ariel softly.]
+
+[What ho! more work yet?]`);
+  });
+
+  it("removes the indent space before existing bracketed stage directions", () => {
+    const raw = `
+*** START OF THE PROJECT GUTENBERG EBOOK DEMO ***
+
+STEPHANO.
+Sing.
+
+ [_Exit, pursued by a bear._]
+
+FERDINAND.
+Hello.
+
+*** END OF THE PROJECT GUTENBERG EBOOK DEMO ***
+`.trim();
+
+    const out = cleanGutenbergText(raw, "Demo Title");
+    expect(out).not.toMatch(/\n \[/);
+    expect(out).toContain("[Exit, pursued by a bear.]");
+    expect(out.split("\n").some((line) => line === "[Exit, pursued by a bear.]")).toBe(true);
+  });
+
   it("strips italic underscores (stage directions)", () => {
     const raw = `
 *** START OF THE PROJECT GUTENBERG EBOOK DEMO ***
