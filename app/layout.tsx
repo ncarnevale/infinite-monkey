@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Special_Elite } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const specialElite = Special_Elite({
+  variable: "--font-typewriter",
+  weight: "400",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Infinite Monkey",
-  description: "Next.js application",
+  description: "A typewriter, given infinite time.",
 };
 
 export default function RootLayout({
@@ -18,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="en" className={`${specialElite.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
