@@ -75,12 +75,6 @@ body {
     0.3px 0 0 rgba(42, 36, 24, 0.15);
 }
 
-.stage-dir {
-  margin-top: 0.875rem;
-  padding-top: 0.125rem;
-}
-
-
 ::selection {
   background: rgba(168, 51, 40, 0.25);
   color: var(--ink);
