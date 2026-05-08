@@ -2,9 +2,9 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { cleanGutenbergText } from "../app/lib/work-text";
+import { cleanGutenbergText } from "../work-text";
 
-const fixturePath = join(import.meta.dirname, "fixtures", "pg1540.txt");
+const fixturePath = join(import.meta.dirname, "fixtures", "TheTempest.txt");
 
 function headingPrefix(title: string): string {
   return `${title}\n\nBy William Shakespeare\n\n\n`;

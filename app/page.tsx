@@ -1,3 +1,4 @@
+import { TypewriterPage } from "./components/TypewriterPage";
 import { WORKS } from "./lib/works-manifest";
 import { fetchWorkText } from "./lib/work-text";
 
@@ -13,7 +14,7 @@ export default async function Home() {
         monkey.
       </div>
       <article className="page typed flex w-full max-w-4xl mx-auto flex-1 flex-col px-8 py-8 text-left text-base leading-7 sm:px-16">
-        <div className="whitespace-pre-wrap">{text}</div>
+        <TypewriterPage text={text} />
       </article>
     </main>
   );
