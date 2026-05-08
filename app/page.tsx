@@ -1,25 +1,22 @@
 export default function Home() {
   return (
-    <main className="flex min-h-0 flex-1 flex-col items-center justify-start px-4 pt-10 pb-0 sm:px-8 sm:pt-16 sm:pb-0">
-      <article className="page typed flex w-full max-w-2xl flex-1 flex-col px-8 py-14 sm:px-16 sm:py-20 leading-7">
-        <header className="mb-12 text-center">
-          <p className="text-[0.65rem] uppercase tracking-[0.45em] text-(--ink-soft)">
-            The Infinite Monkey Project
-          </p>
-          <h1 className="mt-5 text-3xl uppercase tracking-[0.2em] sm:text-4xl">
+    <main className="flex min-h-0 flex-1 flex-col items-start justify-start px-4 pt-10 pb-0 sm:px-8 sm:pt-16 sm:pb-0">
+      <div className="mb-10 font-bold">They say that given enough time, a monkey in a room with a typewriter would produce the complete works of William Shakespeare. You are that monkey.</div>
+      <article className="page typed flex w-full max-w-4xl mx-auto flex-1 flex-col px-8 py-8 text-left text-base leading-7 sm:px-16">
+        <header className="mb-12 text-left font-normal">
+          <h1 className="mt-5 font-normal uppercase">
             The Tempest
           </h1>
-          <p className="mt-3 text-xs uppercase tracking-[0.3em] text-(--ink-soft)">
+          <p className="mt-3 uppercase">
             by William Shakespeare
           </p>
-          <hr className="ribbon-rule mx-auto mt-8 w-24" />
         </header>
 
-        <section className="flex flex-1 flex-col space-y-7">
-          <h2 className="text-center text-xl uppercase tracking-[0.35em]">
+        <section className="flex flex-1 flex-col space-y-7 font-normal">
+          <h2 className="uppercase">
             Act I
           </h2>
-          <h3 className="text-center text-sm uppercase tracking-[0.22em] text-(--ink-soft)">
+          <h3 className="uppercase">
             Scene I. On a ship at sea: a tempestuous noise
           </h3>
 
@@ -31,17 +28,17 @@ export default function Home() {
           </div>
 
           <div>
-            <p className="speaker uppercase">Master</p>
+            <p className="uppercase">Master</p>
             <p>Boatswain!</p>
           </div>
 
           <div>
-            <p className="speaker uppercase">Boatswain</p>
+            <p className="uppercase">Boatswain</p>
             <p>Here, master: what cheer?</p>
           </div>
 
           <div>
-            <p className="speaker uppercase">Master</p>
+            <p className="uppercase">Master</p>
             <p>Good, speak to the mariners: fall to&apos;t, yarely,</p>
             <p>or we run ourselves aground: bestir, bestir.</p>
             <p className="stage-dir">
@@ -53,7 +50,7 @@ export default function Home() {
           </div>
 
           <div>
-            <p className="speaker uppercase">Boatswain</p>
+            <p className="uppercase">Boatswain</p>
             <p>Heigh, my hearts! cheerly, cheerly, my hearts!</p>
             <p>yare, yare! Take in the topsail. Tend to the</p>
             <p>master&apos;s whistle. Blow, till thou burst thy wind,</p>
@@ -67,23 +64,23 @@ export default function Home() {
           </div>
 
           <div>
-            <p className="speaker uppercase">Alonso</p>
+            <p className="uppercase">Alonso</p>
             <p>Good boatswain, have care. Where&apos;s the master?</p>
             <p>Play the men.</p>
           </div>
 
           <div>
-            <p className="speaker uppercase">Boatswain</p>
+            <p className="uppercase">Boatswain</p>
             <p>I pray now, keep below.</p>
           </div>
 
           <div>
-            <p className="speaker uppercase">Antonio</p>
+            <p className="uppercase">Antonio</p>
             <p>Where is the master, boatswain?</p>
           </div>
 
           <div>
-            <p className="speaker uppercase">Boatswain</p>
+            <p className="uppercase">Boatswain</p>
             <p>Do you not hear him? You mar our labour: keep your</p>
             <p>cabins: you do assist the storm.</p>
           </div>
