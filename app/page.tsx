@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <main className="flex min-h-full flex-col items-center justify-start px-4 py-10 sm:px-8 sm:py-16">
-      <article className="page typed w-full max-w-2xl px-8 py-14 sm:px-16 sm:py-20 leading-7">
+    <main className="flex min-h-0 flex-1 flex-col items-center justify-start px-4 pt-10 pb-0 sm:px-8 sm:pt-16 sm:pb-0">
+      <article className="page typed flex w-full max-w-2xl flex-1 flex-col px-8 py-14 sm:px-16 sm:py-20 leading-7">
         <header className="mb-12 text-center">
           <p className="text-[0.65rem] uppercase tracking-[0.45em] text-(--ink-soft)">
             The Infinite Monkey Project
@@ -15,7 +15,7 @@ export default function Home() {
           <hr className="ribbon-rule mx-auto mt-8 w-24" />
         </header>
 
-        <section className="space-y-7">
+        <section className="flex flex-1 flex-col space-y-7">
           <h2 className="text-center text-xl uppercase tracking-[0.35em]">
             Act I
           </h2>
@@ -88,12 +88,6 @@ export default function Home() {
             <p>cabins: you do assist the storm.</p>
           </div>
         </section>
-
-        <footer className="mt-16 flex items-center justify-between text-[0.65rem] uppercase tracking-[0.3em] text-(--ink-soft)">
-          <span>Page 1</span>
-          <span aria-hidden>— ¶ —</span>
-          <span>Draft</span>
-        </footer>
       </article>
     </main>
   );
