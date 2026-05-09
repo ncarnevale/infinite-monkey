@@ -1,3 +1,4 @@
+import { normalizeComparableText } from "./normalize-text";
 import { gutenbergUrl, type WorkManifestItem } from "./works-manifest";
 
 const START_MARKER = "*** START OF THE PROJECT GUTENBERG EBOOK";
@@ -66,7 +67,7 @@ export function cleanGutenbergText(raw: string, title: string): string {
   let body = extractGutenbergBody(raw);
   body = sliceFromShakespeareOpeningIfPresent(body);
   body = normalizeCleanedBody(body);
-  return `${formatWorkHeading(title)}\n\n\n${body}`;
+  return normalizeComparableText(`${formatWorkHeading(title)}\n\n\n${body}`);
 }
 
 export async function fetchWorkText(item: WorkManifestItem): Promise<string> {

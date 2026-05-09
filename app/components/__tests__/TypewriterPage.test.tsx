@@ -74,6 +74,13 @@ describe("TypewriterPage", () => {
     expect(screen.getByTestId("typewriter-page").textContent).toBe("a");
   });
 
+  it("treats typographic apostrophe like ASCII apostrophe", () => {
+    render(<TypewriterPage text={"\u2019"} />);
+
+    fireEvent.keyDown(window, { key: "'" });
+    expect(screen.getByTestId("typewriter-page").textContent).toBe("\u2019");
+  });
+
   it("ignores extra keypresses after full reveal", () => {
     render(<TypewriterPage text={"ab"} />);
 

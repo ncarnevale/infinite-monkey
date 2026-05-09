@@ -40,6 +40,20 @@ Play body.
     expect(cleanGutenbergText(raw, "The Tempest")).toBe(`${headingPrefix("The Tempest")}Play body.`);
   });
 
+  it("normalizes typographic quotes in the cleaned text to ASCII", () => {
+    const raw = `
+*** START OF THE PROJECT GUTENBERG EBOOK DEMO ***
+
+Say \u2018hello\u2019 and \u201Cgoodbye\u201D.
+
+*** END OF THE PROJECT GUTENBERG EBOOK DEMO ***
+`.trim();
+
+    const out = cleanGutenbergText(raw, "Demo");
+    expect(out).toContain(`Say 'hello' and "goodbye".`);
+    expect(out).not.toContain("\u2018");
+  });
+
   it("strips boilerplate headers/footers and keeps only ebook body between markers", () => {
     const raw = `
 This eBook is for the use of anyone anywhere…

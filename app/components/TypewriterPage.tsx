@@ -1,5 +1,6 @@
 "use client";
 
+import { normalizeComparableText } from "../lib/normalize-text";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type TypewriterPageProps = {
@@ -25,7 +26,9 @@ export function TypewriterPage({ text }: TypewriterPageProps) {
       if (revealedCount >= text.length) return;
       const nextChar = text[revealedCount]!;
       const matches =
-        nextChar === "\n" ? e.key === "Enter" : e.key === nextChar;
+        nextChar === "\n"
+          ? e.key === "Enter"
+          : normalizeComparableText(e.key) === normalizeComparableText(nextChar);
       if (matches) {
         e.preventDefault();
         e.stopPropagation();
