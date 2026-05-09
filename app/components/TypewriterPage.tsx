@@ -28,6 +28,8 @@ export function TypewriterPage({ text, onLoadNextWork }: TypewriterPageProps) {
     const onKeyDown = (e: KeyboardEvent) => {
       if (revealedCount >= text.length) return;
 
+      if (e.metaKey || e.ctrlKey || e.altKey || /^F\d+$/.test(e.key)) return;
+
       e.preventDefault();
       e.stopPropagation();
 

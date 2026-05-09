@@ -55,6 +55,22 @@ describe("TypewriterPage", () => {
     scrollBy.mockRestore();
   });
 
+  it("does not handle modifier chords or Fn keys so browser shortcuts still work", () => {
+    render(<TypewriterPage text={"aa"} />);
+
+    fireEvent.keyDown(window, { key: "a", metaKey: true });
+    expect(screen.getByTestId("typewriter-page").textContent).toBe("");
+
+    fireEvent.keyDown(window, { key: "a" });
+    expect(screen.getByTestId("typewriter-page").textContent).toBe("a");
+
+    fireEvent.keyDown(window, { key: "F12" });
+    expect(screen.getByTestId("typewriter-page").textContent).toBe("a");
+
+    fireEvent.keyDown(window, { key: "a" });
+    expect(screen.getByTestId("typewriter-page").textContent).toBe("aa");
+  });
+
   it("does not advance on wrong key", () => {
     render(<TypewriterPage text={"hello"} />);
 
