@@ -77,3 +77,21 @@ export async function fetchWorkText(item: WorkManifestItem): Promise<string> {
   }
   return cleanGutenbergText(await res.text(), item.title);
 }
+
+/**
+ * Use from the browser: Project Gutenberg does not expose CORS headers needed for cross-origin
+ * `fetch` from this app, so the client calls this same-origin API instead (see `app/api/works/`).
+ */
+export async function fetchWorkTextClient(item: WorkManifestItem): Promise<string> {
+  const res = await fetch(`/api/works/${item.gutenbergId}`, { cache: "force-cache" });
+  if (!res.ok) {
+    let detail = "";
+    try {
+      detail = (await res.text()).slice(0, 500);
+    } catch {
+      /* ignore */
+    }
+    throw new Error(`Failed to load ${item.title}: ${res.status} ${detail}`);
+  }
+  return res.text();
+}

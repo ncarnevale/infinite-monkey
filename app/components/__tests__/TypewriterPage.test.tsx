@@ -45,7 +45,8 @@ describe("TypewriterPage", () => {
         expect.objectContaining({ top: expect.any(Number), left: 0 }),
       ),
     );
-    expect(scrollBy.mock.calls[0]![0]!.top as number).toBeGreaterThan(0);
+    const scrollArgs = scrollBy.mock.calls[0]![0] as ScrollToOptions;
+    expect((scrollArgs.top as number) > 0).toBe(true);
 
     fireEvent.keyDown(window, { key: "Enter" });
     await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
@@ -91,5 +92,21 @@ describe("TypewriterPage", () => {
     fireEvent.keyDown(window, { key: "c" });
     fireEvent.keyDown(window, { key: "d" });
     expect(screen.getByTestId("typewriter-page").textContent).toBe("ab");
+  });
+
+  it("requests next segment when unread tail crosses threshold while typing", async () => {
+    const onLoadTracked = vi.fn();
+
+    render(
+      <TypewriterPage
+        text={"a".repeat(1001)}
+        onLoadNextWork={onLoadTracked}
+      />,
+    );
+    expect(onLoadTracked).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(window, { key: "a" });
+
+    await waitFor(() => expect(onLoadTracked).toHaveBeenCalledTimes(1));
   });
 });
