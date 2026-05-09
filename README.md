@@ -1,6 +1,14 @@
 # Infinite Monkey
 
-Next.js App Router project.
+This one should explain itself. Check out the live site: http://infinitemonkey.cool/
+
+## Tech Stack
+
+- Next.js (App Router)
+- React + TypeScript
+- Tailwind CSS
+
+## Running locally
 
 ```bash
 npm install
