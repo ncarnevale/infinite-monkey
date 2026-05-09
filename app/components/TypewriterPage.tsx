@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type TypewriterPageProps = {
   text: string;
 };
+
+const LINE_HEIGHT_PX = 28;
 
 export function TypewriterPage({ text }: TypewriterPageProps) {
   const [revealedCount, setRevealedCount] = useState(0);
@@ -14,6 +16,10 @@ export function TypewriterPage({ text }: TypewriterPageProps) {
     [text, revealedCount],
   );
 
+  const scrollToNextLine = useCallback(() => {
+    window.scrollBy({ top: LINE_HEIGHT_PX, left: 0, behavior: "auto" });
+  }, []);
+
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (revealedCount >= text.length) return;
@@ -22,16 +28,21 @@ export function TypewriterPage({ text }: TypewriterPageProps) {
         nextChar === "\n" ? e.key === "Enter" : e.key === nextChar;
       if (matches) {
         e.preventDefault();
+        e.stopPropagation();
+        if (nextChar === "\n") scrollToNextLine();
         setRevealedCount((n) => n + 1);
       }
     };
 
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [revealedCount, text]);
+    window.addEventListener("keydown", onKeyDown, { capture: true });
+    return () => window.removeEventListener("keydown", onKeyDown, { capture: true });
+  }, [revealedCount, scrollToNextLine, text]);
 
   return (
-    <div className="whitespace-pre-wrap" data-testid="typewriter-page">
+    <div
+      className="whitespace-pre-wrap pb-[min(50vh,28rem)]"
+      data-testid="typewriter-page"
+    >
       {display}
     </div>
   );

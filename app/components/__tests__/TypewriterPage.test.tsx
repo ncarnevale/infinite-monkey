@@ -1,5 +1,11 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { TypewriterPage } from "../TypewriterPage";
 
@@ -24,6 +30,28 @@ describe("TypewriterPage", () => {
 
     fireEvent.keyDown(window, { key: "B" });
     expect(screen.getByTestId("typewriter-page").textContent).toBe("a\nB");
+  });
+
+  it("scrolls by roughly one line on successful Enter (newline)", async () => {
+    const scrollBy = vi.spyOn(window, "scrollBy").mockImplementation(() => {});
+
+    render(<TypewriterPage text={"a\nB"} />);
+    fireEvent.keyDown(window, { key: "a" });
+
+    fireEvent.keyDown(window, { key: "Enter" });
+
+    await waitFor(() =>
+      expect(scrollBy).toHaveBeenCalledWith(
+        expect.objectContaining({ top: expect.any(Number), left: 0 }),
+      ),
+    );
+    expect(scrollBy.mock.calls[0]![0]!.top as number).toBeGreaterThan(0);
+
+    fireEvent.keyDown(window, { key: "Enter" });
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    expect(scrollBy).toHaveBeenCalledTimes(1);
+
+    scrollBy.mockRestore();
   });
 
   it("does not advance on wrong key", () => {
