@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Special_Elite } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
 const specialElite = Special_Elite({
   variable: "--font-typewriter",
@@ -20,8 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <>
     <html lang="en" className={`${specialElite.variable} min-h-dvh antialiased`}>
       <body className="flex min-h-dvh flex-col text-base">{children}</body>
     </html>
+    <Analytics />
+    </>
   );
 }
