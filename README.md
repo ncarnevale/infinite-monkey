@@ -1,3 +1,5 @@
+![screenshot](/screenshot.png?raw=true)
+
 # Infinite Monkey
 
 This one should explain itself. Check out the live site: http://infinitemonkey.cool/
